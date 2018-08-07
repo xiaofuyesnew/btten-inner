@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>必腾报销系统-个人数据</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/data.css">
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/axios.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div class="wrapper" v-bind:class="[showAside ? 'showAside' : (asideShowed ? 'hideAside' : '')]">
+      <div class="header">
+        <div class="btn-menu" v-on:click="showAsideEvent"></div>
+        <div class="oprate">
+          <span>{{ userInfo.username + (userInfo.auth === 2 ? '' : (userInfo.auth === 0 ? '(管理员)' : '(财务)'))}}</span>
+          <a href="">修改资料</a>
+          <a v-on:click="logout">退出登录</a>
+        </div>
+      </div>
+      <div class="content">
+        <div class="banner"></div>
+        <div class="tbwrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>项目</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>餐补</th>
+                <th>交通</th>
+                <th>合计</th>
+                <th>凭证</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>1</td>
+                  <td>大法院</td>
+                  <td>2018-07-06 20:00</td>
+                  <td>2018-07-06 22:00</td>
+                  <td>15.00</td>
+                  <td>30.00</td>
+                  <td>45.00</td>
+                  <td>凭证</td>
+                  <td>xxxxxxx</td>
+              </tr>
+              <tr>
+                  <td>2</td>
+                  <td>大法院</td>
+                  <td>2018-07-06 20:00</td>
+                  <td>2018-07-06 22:00</td>
+                  <td>15.00</td>
+                  <td>30.00</td>
+                  <td>45.00</td>
+                  <td>凭证</td>
+                  <td>xxxxxxx</td>
+              </tr>
+              <tr>
+                  <td>2</td>
+                  <td>大法院</td>
+                  <td>2018-07-06 20:00</td>
+                  <td>2018-07-06 22:00</td>
+                  <td>15.00</td>
+                  <td>30.00</td>
+                  <td>45.00</td>
+                  <td>凭证</td>
+                  <td>xxxxxxx</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="aside" v-bind:class="[asideShowed ? (showAside ? 'show' : 'hide') : '']">
+      <ul>
+        <li v-bind:class="[(currentPage === 'useradmin' || currentPage === 'edituser') ? 'current' : '']" v-show="userInfo.auth === 0 || userInfo.auth === 1">
+          <a>用户管理</a>
+        </li>
+        <li v-bind:class="[(currentPage === 'data' || currentPage === 'editdata') ? 'current' : '']" >
+          <a>个人数据</a>
+        </li>
+        <li v-bind:class="[(currentPage === 'sumdata' || currentPage === 'editsumdata') ? 'current' : '']" v-show="userInfo.auth === 0 || userInfo.auth === 1">
+          <a>数据总览</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer">powered by 黄河水</div>
+  </div>
+  <script src="../js/common.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#main',
+      data: {
+        currentPage: 'data',
+        asideShowed: false,
+        showAside: false,
+        userInfo: {
+          username: 'xxx',
+          auth: 0,
+        }
+      },
+      methods: {
+        showAsideEvent: showAside,
+        logout: logout,
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>必腾报销系统-欢迎</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/welcome.css">
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/axios.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div class="wrapper" v-bind:class="[showAside ? 'showAside' : (asideShowed ? 'hideAside' : '')]">
+      <div class="header">
+        <div class="btn-menu" v-on:click="showAsideEvent"></div>
+        <div class="oprate">
+          <span>{{ userInfo.username + (userInfo.auth === 1 ? '' : (userInfo.auth === 0 ? '(管理员)' : '(财务)'))}}</span>
+          <a href="">修改资料</a>
+          <a v-on:click="logout">退出登录</a>
+        </div>
+      </div>
+      <div class="content">
+        <div class="welcome">欢迎登录报销系统</div>
+      </div>
+    </div>
+    <div class="aside" v-bind:class="[asideShowed ? (showAside ? 'show' : 'hide') : '']">
+      <ul>
+        <li v-bind:class="[(currentPage === 'useradmin' || currentPage === 'edituser') ? 'current' : '']" v-show="userInfo.auth === 0 || userInfo.auth === 1">
+          <a>用户管理</a>
+        </li>
+        <li v-bind:class="[(currentPage === 'data' || currentPage === 'editdata') ? 'current' : '']" >
+          <a>个人数据</a>
+        </li>
+        <li v-bind:class="[(currentPage === 'sumdata' || currentPage === 'editsumdata') ? 'current' : '']" v-show="userInfo.auth === 0 || userInfo.auth === 1">
+          <a>数据总览</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer">powered by 黄河水</div>
+  </div>
+  <script src="../js/common.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#main',
+      data: {
+        currentPage: 'welcome',
+        asideShowed: false,
+        showAside: false,
+        userInfo: {
+          username: 'xxx',
+          auth: 2,
+        }
+      },
+      methods: {
+        showAsideEvent: showAside,
+        logout: logout,
+      }
+    })
+  </script>
+</body>
+
+</html>
