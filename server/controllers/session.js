@@ -12,7 +12,7 @@ const fn_createsession = async ctx => {
         session: myDate
       }).then(r => {
         console.log(r)
-        ctx.rest({ code: 1, msg: 'created'})
+        ctx.rest({ code: 1, msg: 'created', data: r.dataValues})
       })
     } else {
       await models.Session.update(
@@ -23,8 +23,7 @@ const fn_createsession = async ctx => {
           },
           fields: ['session']
         }
-      ).then(r => {
-        console.log(r)
+      ).then(async r => {
         ctx.rest({ code: 1, msg: 'updated'})
       })
     }

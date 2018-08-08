@@ -2,7 +2,7 @@
  * @Author: allen.wong 
  * @Date: 2018-08-07 14:18:31 
  * @Last Modified by: allen.wong
- * @Last Modified time: 2018-08-08 09:59:32
+ * @Last Modified time: 2018-08-08 15:02:09
  */
 
 const models = require('../db/db.js')
@@ -94,7 +94,7 @@ const fn_userlist = async ctx => {
     limit: ctx.query.limit || 10,
     offset: (ctx.query.limit || 10) * ((ctx.query.page || 1) - 1)
   }).then(m => {
-    if (m.rows.length) {
+    if (m.count) {
       let final = []
       for (let item of m.rows) {
         final.push(item.dataValues)
@@ -103,6 +103,7 @@ const fn_userlist = async ctx => {
         code: 1,
         msg: 'query finished',
         data: final,
+        count: m.count,
         page: ctx.query.page || 1,
         pages: Math.ceil(m.count / (ctx.query.limit || 10))
       })
